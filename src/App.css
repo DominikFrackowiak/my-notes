@@ -1,1 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: var(--font-sans);
+	/* --color-light: #f5f4f4;
+ --color-light-secondary: rgb(165, 164, 164);
+ --color-dark: #1f1d1d;
+ --color-dark-secondary: #1f1d1d9c;
+ --color-accent: #e04c4c;
+ --color-accent-darker: #c94747;
+ --text-zero: 0px;
+ --text-md: 17px;
+ --tracking-heading: 3px;
+ --tracking-zero: 0px; */
+	--spacing-sidebar-full: 279px;
+	--spacing-form: 600px;
+}
