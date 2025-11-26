@@ -4,30 +4,46 @@ import Sidebar from '../../organisms/sidebar/sidebar'
 import FormCreateNote from '../../organisms/form-create-note/form-create-note'
 
 export default function AppLayout() {
-	const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true)
+	const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
+	const [isSidebarPinned, setIsSidebarPinned] = useState<boolean>(false)
 	const [isFormActive, setIsFormActive] = useState<boolean>(false)
 
-	const toggleSidebar = (next?: boolean) => {
-		if (typeof next === 'boolean') {
-			setIsSidebarOpen(next)
-		} else {
-			setIsSidebarOpen(prev => !prev)
-		}
+	const toggleSidebar = () => {
+		setIsSidebarOpen(prev => {
+			const next = !prev
+
+			setIsSidebarPinned(next)
+			return next
+		})
 	}
 
-	const toggleActive = (val: boolean) => {
-		setIsFormActive(val)
+	const closeSidebar = () => {
+		setIsSidebarOpen(false)
+		setIsSidebarPinned(false)
+	}
+
+	const openSidebar = () => {
+		setIsSidebarOpen(true)
+	}
+
+	const toggleFormActive = () => {
+		setIsFormActive(prev => !prev)
 	}
 
 	return (
 		<>
 			<Header toggleSidebar={toggleSidebar} />
 			<div className='flex'>
-				<Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+				<Sidebar
+					isSidebarOpen={isSidebarOpen}
+					openSidebar={openSidebar}
+					closeSidebar={closeSidebar}
+					isSidebarPinned={isSidebarPinned}
+				/>
 				<main className='flex justify-center gap-8 flex-1  mt-16 py-8'>
 					<FormCreateNote
 						isFormActive={isFormActive}
-						toggleActive={toggleActive}
+						toggleFormActive={toggleFormActive}
 					/>
 				</main>
 			</div>
