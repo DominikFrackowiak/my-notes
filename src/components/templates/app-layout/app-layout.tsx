@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Header from '../../organisms/header/header'
 import Sidebar from '../../organisms/sidebar/sidebar'
-import FormCreateNote from '../../organisms/form-create-note/form-create-note'
+
+import Form from '../../organisms/form-create-note/form'
 
 export default function AppLayout() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
 	const [isSidebarPinned, setIsSidebarPinned] = useState<boolean>(false)
-	const [isFormActive, setIsFormActive] = useState<boolean>(false)
 
 	const toggleSidebar = () => {
 		setIsSidebarOpen(prev => {
@@ -26,10 +26,6 @@ export default function AppLayout() {
 		setIsSidebarOpen(true)
 	}
 
-	const toggleFormActive = () => {
-		setIsFormActive(prev => !prev)
-	}
-
 	return (
 		<>
 			<Header toggleSidebar={toggleSidebar} />
@@ -40,11 +36,8 @@ export default function AppLayout() {
 					closeSidebar={closeSidebar}
 					isSidebarPinned={isSidebarPinned}
 				/>
-				<main className='flex justify-center gap-8 flex-1  mt-16 py-8'>
-					<FormCreateNote
-						isFormActive={isFormActive}
-						toggleFormActive={toggleFormActive}
-					/>
+				<main className='flex items-start justify-center gap-8 flex-1  mt-16 py-8'>
+					<Form />
 				</main>
 			</div>
 		</>
