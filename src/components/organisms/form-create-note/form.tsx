@@ -91,7 +91,7 @@ export default function Form() {
 		<div
 			ref={refForm}
 			className={cn(
-				'flex flex-col w-form shadow-md rounded-md',
+				'flex flex-col w-form shadow-xl rounded-lg border border-border',
 				!isFormActive ? 'h-11 ' : 'min-h-34 h-auto'
 			)}
 			onClick={e => {
@@ -112,7 +112,7 @@ export default function Form() {
 										aria-placeholder={'Enter title...'}
 										className='w-full p-2 outline-none'
 										placeholder={
-											<div className='pointer-events-none absolute left-3 top-2 text-gray-400'>
+											<div className='pointer-events-none absolute left-3 top-2 text-gray-400 text-xl'>
 												Title
 											</div>
 										}
@@ -140,7 +140,7 @@ export default function Form() {
 								<ContentEditable className='w-full p-2 outline-none' />
 							}
 							placeholder={
-								<div className='pointer-events-none absolute left-3 top-2 text-gray-400'>
+								<div className='pointer-events-none absolute left-3 top-2 text-gray-400 text-15'>
 									Enter some text...
 								</div>
 							}

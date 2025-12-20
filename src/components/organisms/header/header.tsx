@@ -1,3 +1,6 @@
+import Button from '../../atoms/Button'
+import HamburgerIcon from '../../../assets/icons/hamburger.svg'
+
 interface Props {
 	toggleSidebar: () => void
 }
@@ -6,9 +9,11 @@ export default function Header({ toggleSidebar }: Props) {
 	return (
 		<header className='fixed top-0 left-0 flex w-full h-16 bg-amber-100'>
 			<div className='flex items-center h-full gap-2'>
-				<button className='h-2/3 cursor-pointer' onClick={toggleSidebar}>
-					SIDE
-				</button>
+				<Button
+					size='SM'
+					onClick={toggleSidebar}
+					icon={<img src={HamburgerIcon} alt='' className='h-5 w-5' />}
+				/>
 				<div className='flex items-center h-full gap-2'>
 					<img
 						id='logo'

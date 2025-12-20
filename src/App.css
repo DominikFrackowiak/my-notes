@@ -12,6 +12,9 @@
  --text-md: 17px;
  --tracking-heading: 3px;
  --tracking-zero: 0px; */
+	--text-15: 15px;
 	--spacing-sidebar-full: 279px;
 	--spacing-form: 600px;
+	--color-border: #e0e0e0;
+	--shadow-xl: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
