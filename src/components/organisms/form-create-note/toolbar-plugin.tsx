@@ -7,6 +7,9 @@ import {
 
 import { useState, useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { Popover } from '@ark-ui/react/popover'
+import Button from '../../atoms/Button'
+import FormattingIcon from '../../../assets/icons/formatting.svg'
 
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext()
@@ -39,14 +42,30 @@ function ToolbarPlugin() {
 		editor.dispatchCommand(FORMAT_TEXT_COMMAND, format)
 	}
 
-	const buttonClass = (isActive: boolean) =>
-		`h-8 w-8 border rounded-full ${
-			isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
-		} hover:bg-blue-100`
+	// const buttonClass = (isActive: boolean) =>
+	// 	`h-8 w-8 border rounded-full ${
+	// 		isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
+	// 	} hover:bg-blue-100`
 
 	return (
 		<div className='flex gap-2 p-2 '>
-			<button
+			<Popover.Root>
+				<Popover.Trigger>
+					<Button size='SM' icon={<img src={FormattingIcon} />} />
+				</Popover.Trigger>
+				<Popover.Positioner>
+					<Popover.Content>
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+						<Button size='SM' icon={<img src={FormattingIcon} />} />
+					</Popover.Content>
+				</Popover.Positioner>
+			</Popover.Root>
+			{/* <button
 				onClick={() => formatText('bold')}
 				className={buttonClass(isBold)}
 				type='button'
@@ -73,7 +92,7 @@ function ToolbarPlugin() {
 				type='button'
 			>
 				<s>S</s>
-			</button>
+			</button> */}
 		</div>
 	)
 }

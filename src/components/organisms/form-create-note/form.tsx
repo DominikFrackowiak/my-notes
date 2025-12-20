@@ -8,6 +8,9 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
 import ToolbarPlugin from './toolbar-plugin'
 
 import { cn } from '../../../lib/tw-merge'
+import Button from '../../atoms/Button'
+import PinNoteIcon from '../../../assets/icons/pin-note.svg'
+import ImageIcon from '../../../assets/icons/image.svg'
 
 const theme = {
 	text: {
@@ -91,8 +94,8 @@ export default function Form() {
 		<div
 			ref={refForm}
 			className={cn(
-				'flex flex-col w-form shadow-xl rounded-lg border border-border',
-				!isFormActive ? 'h-11 ' : 'min-h-34 h-auto'
+				'flex flex-col w-form shadow-xl rounded-lg border border-border-form ',
+				!isFormActive ? 'h-11 justify-center' : 'min-h-34 h-auto justify-start'
 			)}
 			onClick={e => {
 				e.stopPropagation()
@@ -106,20 +109,24 @@ export default function Form() {
 							key={`title-${resetId}`}
 							initialConfig={titleConfig}
 						>
-							<RichTextPlugin
-								contentEditable={
-									<ContentEditable
-										aria-placeholder={'Enter title...'}
-										className='w-full p-2 outline-none'
-										placeholder={
-											<div className='pointer-events-none absolute left-3 top-2 text-gray-400 text-xl'>
-												Title
-											</div>
-										}
-									/>
-								}
-								ErrorBoundary={LexicalErrorBoundary}
-							/>
+							<div className='flex justify-between items-center'>
+								<RichTextPlugin
+									contentEditable={
+										<ContentEditable
+											aria-placeholder={'Enter title...'}
+											className='w-full p-2 outline-none'
+											placeholder={
+												<span className='pointer-events-none absolute left-3 top-2 text-gray-400 text-xl'>
+													Title
+												</span>
+											}
+										/>
+									}
+									ErrorBoundary={LexicalErrorBoundary}
+								/>
+
+								<Button size='SM' icon={<img src={PinNoteIcon} />} />
+							</div>
 							<HistoryPlugin />
 							<OnChangePlugin
 								onChange={editorState => {
@@ -135,17 +142,22 @@ export default function Form() {
 						key={`content-${resetId}`}
 						initialConfig={contentConfig}
 					>
-						<RichTextPlugin
-							contentEditable={
-								<ContentEditable className='w-full p-2 outline-none' />
-							}
-							placeholder={
-								<div className='pointer-events-none absolute left-3 top-2 text-gray-400 text-15'>
-									Enter some text...
-								</div>
-							}
-							ErrorBoundary={LexicalErrorBoundary}
-						/>
+						<div className='flex justify-between items-center'>
+							<RichTextPlugin
+								contentEditable={
+									<ContentEditable className='w-full p-2 outline-none' />
+								}
+								placeholder={
+									<span className='pointer-events-none absolute left-3 top-2 text-gray-400 text-15'>
+										Enter some text...
+									</span>
+								}
+								ErrorBoundary={LexicalErrorBoundary}
+							/>
+							{!isFormActive ? (
+								<Button size='SM' icon={<img src={ImageIcon} />} />
+							) : null}
+						</div>
 
 						<HistoryPlugin />
 						<OnChangePlugin
