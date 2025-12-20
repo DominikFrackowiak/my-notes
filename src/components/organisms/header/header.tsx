@@ -1,6 +1,8 @@
 import Button from '../../atoms/Button'
 import HamburgerIcon from '../../../assets/icons/hamburger.svg'
 
+import RepeatIcon from '../../../assets/icons/repeat.svg'
+
 interface Props {
 	toggleSidebar: () => void
 }
@@ -10,9 +12,9 @@ export default function Header({ toggleSidebar }: Props) {
 		<header className='fixed top-0 left-0 flex w-full h-16 bg-amber-100'>
 			<div className='flex items-center h-full gap-2'>
 				<Button
-					size='SM'
+					size='L'
 					onClick={toggleSidebar}
-					icon={<img src={HamburgerIcon} alt='' className='h-5 w-5' />}
+					icon={<img src={HamburgerIcon} alt='' />}
 				/>
 				<div className='flex items-center h-full gap-2'>
 					<img
