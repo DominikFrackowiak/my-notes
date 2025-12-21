@@ -8,8 +8,11 @@ import {
 import { useState, useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { Popover } from '@ark-ui/react/popover'
-import Button from '../../atoms/Button'
+import Button from '../../atoms/button'
 import FormattingIcon from '../../../assets/icons/formatting.svg'
+import PopoverComponent from '../../molecules/popover'
+import ImageIcon from '../../../assets/icons/image.svg'
+import PaletteIcon from '../../../assets/icons/palette.svg'
 
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext()
@@ -17,6 +20,7 @@ function ToolbarPlugin() {
 	const [isItalic, setIsItalic] = useState(false)
 	const [isUnderline, setIsUnderline] = useState(false)
 	const [isStrikethrough, setIsStrikethrough] = useState(false)
+	const [isOpen, setIsOpen] = useState(false)
 
 	// Aktualizuj stan buttonów na podstawie zaznaczenia
 	const updateToolbar = () => {
@@ -42,57 +46,69 @@ function ToolbarPlugin() {
 		editor.dispatchCommand(FORMAT_TEXT_COMMAND, format)
 	}
 
-	// const buttonClass = (isActive: boolean) =>
-	// 	`h-8 w-8 border rounded-full ${
-	// 		isActive ? 'bg-blue-500 text-white' : 'bg-white text-black'
-	// 	} hover:bg-blue-100`
-
 	return (
-		<div className='flex gap-2 p-2 '>
-			<Popover.Root>
-				<Popover.Trigger>
-					<Button size='SM' icon={<img src={FormattingIcon} />} />
-				</Popover.Trigger>
-				<Popover.Positioner>
-					<Popover.Content>
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-						<Button size='SM' icon={<img src={FormattingIcon} />} />
-					</Popover.Content>
-				</Popover.Positioner>
-			</Popover.Root>
-			{/* <button
-				onClick={() => formatText('bold')}
-				className={buttonClass(isBold)}
-				type='button'
-			>
-				<strong>B</strong>
-			</button>
-			<button
-				onClick={() => formatText('italic')}
-				className={buttonClass(isItalic)}
-				type='button'
-			>
-				<em>I</em>
-			</button>
-			<button
-				onClick={() => formatText('underline')}
-				className={buttonClass(isUnderline)}
-				type='button'
-			>
-				<u>U</u>
-			</button>
-			<button
-				onClick={() => formatText('strikethrough')}
-				className={buttonClass(isStrikethrough)}
-				type='button'
-			>
-				<s>S</s>
-			</button> */}
+		<div className='flex flex-col gap-2 p-2'>
+			{isOpen ? (
+				<div className='flex gap-2'>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+					<Button
+						size='SM'
+						icon={<img src={FormattingIcon} />}
+						onClick={() => formatText('bold')}
+					/>
+				</div>
+			) : null}
+			<div>
+				{' '}
+				<Button
+					size='SM'
+					icon={<img src={FormattingIcon} />}
+					onClick={() => setIsOpen(v => !v)}
+				/>
+				<PopoverComponent
+					trigger={<Button size='SM' icon={<img src={PaletteIcon} />} />}
+					onClick={() => setIsOpen(false)}
+				>
+					<div>
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' icon={<img src={ImageIcon} />} />
+					</div>
+				</PopoverComponent>
+			</div>
 		</div>
 	)
 }

@@ -27,7 +27,7 @@ export default function AppLayout() {
 	}
 
 	return (
-		<>
+		<div className='bg-[var(--background)] text-[var(--text-color)]'>
 			<Header toggleSidebar={toggleSidebar} />
 			<div className='flex'>
 				<Sidebar
@@ -40,6 +40,6 @@ export default function AppLayout() {
 					<Form />
 				</main>
 			</div>
-		</>
+		</div>
 	)
 }

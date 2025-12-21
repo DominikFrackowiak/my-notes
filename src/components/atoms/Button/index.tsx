@@ -4,6 +4,8 @@ interface Props {
 	size?: 'L' | 'SM'
 	icon: React.ReactElement
 	onClick?: () => void
+	type?: 'button' | 'submit'
+	backgroundColor?: 'yellow' | 'red'
 }
 
 const buttonStyles = {

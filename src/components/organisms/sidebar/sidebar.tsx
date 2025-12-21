@@ -23,7 +23,7 @@ export default function Sidebar({
 	return (
 		<aside
 			className={cn(
-				'min-h-screen bg-amber-400 transition-width will-change-[width] duration-300 ease-in-out',
+				'min-h-screen transition-width will-change-[width] duration-300 ease-in-out',
 				isSidebarOpen ? 'w-20 lg:w-sidebar-full' : 'w-20 lg:w-20'
 			)}
 			onMouseOver={() => {
@@ -37,7 +37,7 @@ export default function Sidebar({
 				}
 			}}
 		>
-			<div>TAGI</div>
+			{/* <div>TAGI</div> */}
 			{tags ? <ul></ul> : null}
 		</aside>
 	)

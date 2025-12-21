@@ -1,20 +1,83 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+	--background: #fff !important;
+	--color: rgb(32, 33, 36) !important;
+	--coral: #faafa8;
+	--peach: #f39f76;
+	--sand: #fff8b8;
+	--peppermint: #e2f6d3;
+	--salvia: #b4ddd3;
+	--lightgray: #d4e4ed;
+	--storm: #aeccdc;
+	--twilight: #d3bfdb;
+	--flower: #f6e2dd;
+	--clay: #e9e3d4;
+	--chalk: #efeff1;
+	--button-background-gray: #e9eaea;
+	--button-background-yellow: #feefc3;
+}
+
+.light {
+	--background: #fff !important;
+	--color: rgb(32, 33, 36) !important;
+	--coral: #faafa8;
+	--peach: #f39f76;
+	--sand: #fff8b8;
+	--peppermint: #e2f6d3;
+	--salvia: #b4ddd3;
+	--lightgray: #d4e4ed;
+	--storm: #aeccdc;
+	--twilight: #d3bfdb;
+	--flower: #f6e2dd;
+	--clay: #e9e3d4;
+	--chalk: #efeff1;
+	--button-background-gray: #e9eaea;
+	--button-background-yellow: #feefc3;
+}
+
+.dark {
+	--background: #202124 !important;
+	--color: rgb(232, 234, 237) !important;
+	--coral: #77172e;
+	--peach: #692b17;
+	--sand: #7c4a03;
+	--peppermint: #264d3b;
+	--salvia: #0c625d;
+	--lightgray: #256377;
+	--storm: #284255;
+	--twilight: #472e5b;
+	--flower: #6c394f;
+	--clay: #4b443a;
+	--chalk: #202124;
+	--button-background-gray: #313236;
+	--button-background-yellow: #41331c;
+}
 
 @theme {
 	--font-sans: var(--font-sans);
-	/* --color-light: #f5f4f4;
- --color-light-secondary: rgb(165, 164, 164);
- --color-dark: #1f1d1d;
- --color-dark-secondary: #1f1d1d9c;
- --color-accent: #e04c4c;
- --color-accent-darker: #c94747;
- --text-zero: 0px;
- --text-md: 17px;
- --tracking-heading: 3px;
- --tracking-zero: 0px; */
 	--text-15: 15px;
 	--spacing-sidebar-full: 279px;
 	--spacing-form: 600px;
 	--color-border-form: #e0e0e0;
 	--shadow-xl: 0 3px 5px rgba(0, 0, 0, 0.2);
+	--shadow-popover: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+		0 2px 6px 2px rgba(60, 64, 67, 0.15);
+	--color-background: var(--background);
+	--color-coral: var(--coral);
+	--color-peach: var(--peach);
+	--color-sand: var(--sand);
+	--color-peppermint: var(--peppermint);
+	--color-salvia: var(--salvia);
+	--color-lightgray: var(--lightgray);
+	--color-storm: var(--storm);
+	--color-twilight: var(--twilight);
+	--color-flower: var(--flower);
+	--color-clay: var(--clay);
+	--color-chalk: var(--chalk);
+	--color-button-background-yellow: var(--button-background-yellow);
+	--color-button-background-gray: var(--button-background-gray);
+	--color-txt: var(--color);
+	--color-background: var(--background);
 }
