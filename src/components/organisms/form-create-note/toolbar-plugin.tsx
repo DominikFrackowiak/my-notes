@@ -8,7 +8,7 @@ import {
 import { useState, useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 import { Popover } from '@ark-ui/react/popover'
-import Button from '../../atoms/button'
+import Button from '../../atoms/Button'
 import FormattingIcon from '../../../assets/icons/formatting.svg'
 import PopoverComponent from '../../molecules/popover'
 import ImageIcon from '../../../assets/icons/image.svg'
@@ -99,13 +99,17 @@ function ToolbarPlugin() {
 					onClick={() => setIsOpen(false)}
 				>
 					<div>
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
-						<Button size='SM' icon={<img src={ImageIcon} />} />
+						<Button size='SM' backgroundColor='coral' />
+						<Button size='SM' backgroundColor='peach' />
+						<Button size='SM' backgroundColor='sand' />
+						<Button size='SM' backgroundColor='peppermint' />
+						<Button size='SM' backgroundColor='salvia' />
+						<Button size='SM' backgroundColor='lightgray' />
+						<Button size='SM' backgroundColor='storm' />
+						<Button size='SM' backgroundColor='twilight' />
+						<Button size='SM' backgroundColor='flower' />
+						<Button size='SM' backgroundColor='clay' />
+						<Button size='SM' backgroundColor='chalk' />
 					</div>
 				</PopoverComponent>
 			</div>

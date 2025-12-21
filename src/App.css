@@ -1,83 +1,63 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-	--background: #fff !important;
-	--color: rgb(32, 33, 36) !important;
-	--coral: #faafa8;
-	--peach: #f39f76;
-	--sand: #fff8b8;
-	--peppermint: #e2f6d3;
-	--salvia: #b4ddd3;
-	--lightgray: #d4e4ed;
-	--storm: #aeccdc;
-	--twilight: #d3bfdb;
-	--flower: #f6e2dd;
-	--clay: #e9e3d4;
-	--chalk: #efeff1;
-	--button-background-gray: #e9eaea;
-	--button-background-yellow: #feefc3;
-}
-
-.light {
-	--background: #fff !important;
-	--color: rgb(32, 33, 36) !important;
-	--coral: #faafa8;
-	--peach: #f39f76;
-	--sand: #fff8b8;
-	--peppermint: #e2f6d3;
-	--salvia: #b4ddd3;
-	--lightgray: #d4e4ed;
-	--storm: #aeccdc;
-	--twilight: #d3bfdb;
-	--flower: #f6e2dd;
-	--clay: #e9e3d4;
-	--chalk: #efeff1;
-	--button-background-gray: #e9eaea;
-	--button-background-yellow: #feefc3;
-}
-
-.dark {
-	--background: #202124 !important;
-	--color: rgb(232, 234, 237) !important;
-	--coral: #77172e;
-	--peach: #692b17;
-	--sand: #7c4a03;
-	--peppermint: #264d3b;
-	--salvia: #0c625d;
-	--lightgray: #256377;
-	--storm: #284255;
-	--twilight: #472e5b;
-	--flower: #6c394f;
-	--clay: #4b443a;
-	--chalk: #202124;
-	--button-background-gray: #313236;
-	--button-background-yellow: #41331c;
-}
-
 @theme {
 	--font-sans: var(--font-sans);
 	--text-15: 15px;
 	--spacing-sidebar-full: 279px;
 	--spacing-form: 600px;
 	--color-border-form: #e0e0e0;
+
 	--shadow-xl: 0 3px 5px rgba(0, 0, 0, 0.2);
 	--shadow-popover: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
 		0 2px 6px 2px rgba(60, 64, 67, 0.15);
-	--color-background: var(--background);
-	--color-coral: var(--coral);
-	--color-peach: var(--peach);
-	--color-sand: var(--sand);
-	--color-peppermint: var(--peppermint);
-	--color-salvia: var(--salvia);
-	--color-lightgray: var(--lightgray);
-	--color-storm: var(--storm);
-	--color-twilight: var(--twilight);
-	--color-flower: var(--flower);
-	--color-clay: var(--clay);
-	--color-chalk: var(--chalk);
-	--color-button-background-yellow: var(--button-background-yellow);
-	--color-button-background-gray: var(--button-background-gray);
-	--color-txt: var(--color);
-	--color-background: var(--background);
+
+	/* backgrounds */
+	--color-background: #ffffff;
+	--color-background-dark: #202124;
+
+	/* text */
+	--color-txt: rgb(32, 33, 36);
+	--color-txt-dark: rgb(232, 234, 237);
+
+	/* colors */
+	--color-coral: #faafa8;
+	--color-coral-dark: #77172e;
+
+	--color-peach: #f39f76;
+	--color-peach-dark: #692b17;
+
+	--color-sand: #fff8b8;
+	--color-sand-dark: #7c4a03;
+
+	--color-peppermint: #e2f6d3;
+	--color-peppermint-dark: #264d3b;
+
+	--color-salvia: #b4ddd3;
+	--color-salvia-dark: #0c625d;
+
+	--color-lightgray: #d4e4ed;
+	--color-lightgray-dark: #256377;
+
+	--color-storm: #aeccdc;
+	--color-storm-dark: #284255;
+
+	--color-twilight: #d3bfdb;
+	--color-twilight-dark: #472e5b;
+
+	--color-flower: #f6e2dd;
+	--color-flower-dark: #6c394f;
+
+	--color-clay: #e9e3d4;
+	--color-clay-dark: #4b443a;
+
+	--color-chalk: #efeff1;
+	--color-chalk-dark: #202124;
+
+	/* buttons */
+	--color-button-background-yellow: #feefc3;
+	--color-button-background-yellow-dark: #41331c;
+
+	--color-button-background-gray: #e9eaea;
+	--color-button-background-gray-dark: #313236;
 }

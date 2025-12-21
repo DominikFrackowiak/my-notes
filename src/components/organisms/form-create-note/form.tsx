@@ -8,7 +8,7 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
 import ToolbarPlugin from './toolbar-plugin'
 
 import { cn } from '../../../lib/tw-merge'
-import Button from '../../atoms/button'
+import Button from '../../atoms/Button'
 import PinNoteIcon from '../../../assets/icons/pin-note.svg'
 import ImageIcon from '../../../assets/icons/image.svg'
 

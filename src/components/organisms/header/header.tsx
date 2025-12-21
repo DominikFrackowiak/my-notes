@@ -1,14 +1,12 @@
-import Button from '../../atoms/button'
+import Button from '../../atoms/Button'
 import HamburgerIcon from '../../../assets/icons/hamburger.svg'
-
-import RepeatIcon from '../../../assets/icons/repeat.svg'
-import Icon from '../../atoms/icon/icon'
 
 interface Props {
 	toggleSidebar: () => void
+	toggleTheme: () => void
 }
 
-export default function Header({ toggleSidebar }: Props) {
+export default function Header({ toggleSidebar, toggleTheme }: Props) {
 	return (
 		<header className='fixed top-0 left-0 flex w-full h-16'>
 			<div className='flex items-center h-full gap-2'>
@@ -27,6 +25,8 @@ export default function Header({ toggleSidebar }: Props) {
 					<span className='text-xl'>MyNotes</span>
 				</div>
 			</div>
+			<div></div>
+			<button onClick={toggleTheme}>Dark/Light</button>
 		</header>
 	)
 }
