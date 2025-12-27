@@ -7,12 +7,18 @@ import {
 
 import { useState, useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { Popover } from '@ark-ui/react/popover'
+// import { Popover } from '@ark-ui/react/popover'
 import Button from '../../atoms/Button'
-import FormattingIcon from '../../../assets/icons/formatting.svg'
+// import FormattingIcon from '../../../assets/icons/formatting.svg'
 import PopoverComponent from '../../molecules/popover'
-import ImageIcon from '../../../assets/icons/image.svg'
-import PaletteIcon from '../../../assets/icons/palette.svg'
+import ImageIcon from '../../../assets/icons/image.svg?react'
+import PaletteIcon from '../../../assets/icons/palette.svg?react'
+import FormattingIcon from '../../../assets/icons/formatting.svg?react'
+import MoreOptionsIcon from '../../../assets/icons/more-options.svg?react'
+import ArchiveIcon from '../../../assets/icons/archive.svg?react'
+import TextFormattingSelection from './text-format'
+import BackgroundColorSelection from './background-color-selection'
+import MoreOptions from './more-options'
 
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext()
@@ -47,71 +53,56 @@ function ToolbarPlugin() {
 	}
 
 	return (
-		<div className='flex flex-col gap-2 p-2'>
-			{isOpen ? (
-				<div className='flex gap-2'>
+		<div className='w-full flex flex-col gap-2 p-2'>
+			{isOpen ? <TextFormattingSelection formatText={formatText} /> : null}
+			<div className='flex w-full justify-between items-center'>
+				<div className='w-full flex items-center'>
 					<Button
 						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
+						icon={<FormattingIcon className=' text-txt dark:text-txt-dark' />}
+						onClick={() => setIsOpen(v => !v)}
+					/>
+					<PopoverComponent
+						trigger={
+							<Button
+								size='SM'
+								icon={<PaletteIcon className='text-txt dark:text-txt-dark' />}
+							/>
+						}
+						onClick={() => setIsOpen(false)}
+					>
+						<BackgroundColorSelection />
+					</PopoverComponent>
+					<Button
+						size='SM'
+						icon={<ImageIcon className=' text-txt dark:text-txt-dark' />}
+						// onClick={() => setIsOpen(v => !v)}
 					/>
 					<Button
 						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
+						icon={<ArchiveIcon className=' text-txt dark:text-txt-dark' />}
 					/>
-					<Button
-						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
-					/>
-					<Button
-						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
-					/>
-					<Button
-						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
-					/>
-					<Button
-						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
-					/>
-					<Button
-						size='SM'
-						icon={<img src={FormattingIcon} />}
-						onClick={() => formatText('bold')}
-					/>
+					<PopoverComponent
+						trigger={
+							<Button
+								size='SM'
+								icon={
+									<MoreOptionsIcon className='text-txt dark:text-txt-dark' />
+								}
+							/>
+						}
+						onClick={() => setIsOpen(false)}
+					>
+						<MoreOptions/>
+					</PopoverComponent>
 				</div>
-			) : null}
-			<div>
-				{' '}
 				<Button
+					isRectangular={true}
 					size='SM'
-					icon={<img src={FormattingIcon} />}
-					onClick={() => setIsOpen(v => !v)}
-				/>
-				<PopoverComponent
-					trigger={<Button size='SM' icon={<img src={PaletteIcon} />} />}
-					onClick={() => setIsOpen(false)}
+					onClick={() => console.log('Close')}
 				>
-					<div>
-						<Button size='SM' backgroundColor='coral' />
-						<Button size='SM' backgroundColor='peach' />
-						<Button size='SM' backgroundColor='sand' />
-						<Button size='SM' backgroundColor='peppermint' />
-						<Button size='SM' backgroundColor='salvia' />
-						<Button size='SM' backgroundColor='lightgray' />
-						<Button size='SM' backgroundColor='storm' />
-						<Button size='SM' backgroundColor='twilight' />
-						<Button size='SM' backgroundColor='flower' />
-						<Button size='SM' backgroundColor='clay' />
-						<Button size='SM' backgroundColor='chalk' />
-					</div>
-				</PopoverComponent>
+					<span className='text-txt text-sm dark:text-txt-dark'>Zamknij</span>
+				</Button>
 			</div>
 		</div>
 	)

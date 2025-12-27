@@ -25,11 +25,17 @@ function onError(error: Error) {
 	console.error(error)
 }
 
+const backgroundColors = {
+	default: 'bg-white dark:bg-dark',
+	coral: 'bg-coral dark:bg-coral-dark',
+}
+
 export default function Form() {
 	const [titleState, setTitleState] = useState<string>('')
 	const [contentState, setContentState] = useState<string>('')
 	const [isFormActive, setIsFormActive] = useState<boolean>(false)
 	const [resetId, setResetId] = useState<number>(0)
+	const [backgroundColor, setBackgroundColor] = useState('white')
 
 	const refForm = useRef<HTMLDivElement | null>(null)
 
@@ -61,7 +67,8 @@ export default function Form() {
 	useEffect(() => {
 		console.log({ titleState })
 		console.log({ contentState })
-	}, [titleState, contentState])
+		console.log({ backgroundColor })
+	}, [titleState, contentState, backgroundColor])
 
 	useEffect(() => {
 		document.addEventListener('click', handleClickOutside, true)
@@ -94,8 +101,9 @@ export default function Form() {
 		<div
 			ref={refForm}
 			className={cn(
-				'flex flex-col w-form shadow-xl rounded-lg border border-border-form ',
-				!isFormActive ? 'h-11 justify-center' : 'min-h-34 h-auto justify-start'
+				'flex flex-col w-form shadow-xl rounded-lg border border-border-form transition-colors duration-1000',
+				!isFormActive ? 'h-11 justify-center' : 'min-h-34 h-auto justify-start',
+				backgroundColors[backgroundColor]
 			)}
 			onClick={e => {
 				e.stopPropagation()
@@ -167,7 +175,10 @@ export default function Form() {
 							}}
 						/>
 						{isFormActive ? (
-							<div className='flex gap2'>
+							<div
+								className='flex gap-2 border border-red-700'
+								onClick={() => setBackgroundColor('coral')}
+							>
 								<ToolbarPlugin />
 							</div>
 						) : null}

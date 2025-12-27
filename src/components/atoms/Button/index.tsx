@@ -19,6 +19,10 @@ interface Props {
 	onClick?: () => void
 	type?: 'button' | 'submit'
 	backgroundColor?: BackgroundColor
+	children?: React.ReactElement
+	className?: string
+	id?: string
+	isRectangular?: boolean
 }
 
 const buttonStyles = {
@@ -32,17 +36,19 @@ const IconSizes = {
 }
 
 const buttonColors = {
-	coral: 'bg-coral dark:bg-coral-dark',
-	peach: 'bg-peach dark:bg-peach-dark',
+	coral: 'bg-coral dark:bg-coral-dark ',
+	peach: 'bg-peach dark:bg-peach-dark ',
 	sand: 'bg-sand dark:bg-sand-dark',
-	peppermint: 'bg-peppermint dark:bg-peppermint-dark',
-	salvia: 'bg-salvia dark:bg-salvia-dark',
-	lightgray: 'bg-lightgray dark:bg-lightgray-dark',
-	storm: 'bg-storm dark:bg-storm-dark',
-	twilight: 'bg-twilight dark:bg-twilight-dark',
+	peppermint: 'bg-peppermint dark:bg-peppermint-dark ',
+	salvia: 'bg-salvia dark:bg-salvia-dark ',
+	lightgray: 'bg-lightgray dark:bg-lightgray-dark ',
+	storm: 'bg-storm dark:bg-storm-dark ',
+	twilight: 'bg-twilight dark:bg-twilight-dark ',
 	flower: 'bg-flower dark:bg-flower-dark',
-	clay: 'bg-clay dark:bg-clay-dark',
+	clay: 'bg-clay dark:bg-clay-dark ',
 	chalk: 'bg-chalk dark:bg-chalk-dark',
+	yellow:
+		'bg-button-background-yellow hover:bg-button-background-yellow dark:bg-button-background-yellow-dark dark:hover:bg-button-background-yellow-dark',
 } as const
 
 export default function Button({
@@ -50,19 +56,34 @@ export default function Button({
 	icon,
 	onClick,
 	backgroundColor,
+	children,
+	className = '',
+	isRectangular = false,
 }: Props) {
 	return (
 		<button
 			className={cn(
-				'rounded-full  inline-flex items-center justify-center cursor-pointer',
+				'inline-flex items-center justify-center cursor-pointer ',
 				buttonStyles[size],
 				backgroundColor
 					? buttonColors[backgroundColor]
-					: 'bg-transparent hover:bg-[#E9EAEA]'
+					: 'bg-transparent hover:bg-button-background-gray dark:hover:bg-button-background-gray-dark',
+				isRectangular
+					? 'w-auto! rounded px-6 py-2'
+					: 'rounded-full',
+				className
 			)}
 			onClick={onClick}
 		>
-			<div className={cn(IconSizes[size])}>{icon}</div>
+			<div
+				className={cn(
+					'flex justify-center items-center w-full',
+					IconSizes[size]
+				)}
+			>
+				{icon}
+				{children}
+			</div>
 		</button>
 	)
 }

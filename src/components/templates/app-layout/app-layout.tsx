@@ -1,26 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Header from '../../organisms/header/header'
 import Sidebar from '../../organisms/sidebar/sidebar'
 import Form from '../../organisms/form-create-note/form'
 import { cn } from '../../../lib/tw-merge'
-
-const THEME_KEY = 'theme'
-
-function getInitialIsDarkTheme(): boolean {
-	if (typeof window === 'undefined') return false
-
-	const saved = localStorage.getItem(THEME_KEY)
-	if (saved === 'dark') return true
-	if (saved === 'light') return false
-
-	return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
-}
+import { useThemeStore } from '../../../store/ui/theme.store'
 
 export default function AppLayout() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false)
 	const [isSidebarPinned, setIsSidebarPinned] = useState<boolean>(false)
 
-	const [isDarkTheme, setIsDarkTheme] = useState<boolean>(getInitialIsDarkTheme)
+	const theme = useThemeStore(state => state.theme)
 
 	const toggleSidebar = () => {
 		setIsSidebarOpen(prev => {
@@ -39,22 +28,14 @@ export default function AppLayout() {
 		setIsSidebarOpen(true)
 	}
 
-	function toggleTheme() {
-		setIsDarkTheme(prev => !prev)
-	}
-
-	useEffect(() => {
-		localStorage.setItem(THEME_KEY, isDarkTheme ? 'dark' : 'light')
-	}, [isDarkTheme])
-
 	return (
 		<div
 			className={cn(
-				isDarkTheme ? 'dark' : 'light',
+				theme === 'dark' ? 'dark' : 'light',
 				'bg-background dark:bg-background-dark text-txt dark:text-txt-dark'
 			)}
 		>
-			<Header toggleSidebar={toggleSidebar} toggleTheme={toggleTheme} />
+			<Header toggleSidebar={toggleSidebar} />
 			<div className='flex'>
 				<Sidebar
 					isSidebarOpen={isSidebarOpen}

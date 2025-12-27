@@ -1,12 +1,14 @@
 import Button from '../../atoms/Button'
 import HamburgerIcon from '../../../assets/icons/hamburger.svg'
+import { useThemeStore } from '../../../store/ui/theme.store'
 
 interface Props {
 	toggleSidebar: () => void
-	toggleTheme: () => void
 }
 
-export default function Header({ toggleSidebar, toggleTheme }: Props) {
+export default function Header({ toggleSidebar }: Props) {
+	const toggleTheme = useThemeStore(state => state.switchTheme)
+	
 	return (
 		<header className='fixed top-0 left-0 flex w-full h-16'>
 			<div className='flex items-center h-full gap-2'>

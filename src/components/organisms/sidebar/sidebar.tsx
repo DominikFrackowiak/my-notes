@@ -1,4 +1,6 @@
 import { cn } from '../../../lib/tw-merge'
+import SidebarItem from '../../atoms/sidebar-item'
+import TagIcon from '../../../assets/icons/tag.svg?react'
 
 interface Tag {
 	id: string
@@ -14,7 +16,12 @@ interface Props {
 }
 
 export default function Sidebar({
-	tags,
+	tags = [
+		{
+			id: '1',
+			title: 'HTML',
+		},
+	],
 	isSidebarOpen,
 	closeSidebar,
 	openSidebar,
@@ -38,7 +45,11 @@ export default function Sidebar({
 			}}
 		>
 			{/* <div>TAGI</div> */}
-			{tags ? <ul></ul> : null}
+			{tags ? (
+				<ul className='mt-16'>
+					<SidebarItem title='TEST' icon={<TagIcon />} />
+				</ul>
+			) : null}
 		</aside>
 	)
 }
