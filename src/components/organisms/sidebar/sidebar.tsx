@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
 import { cn } from '../../../lib/tw-merge'
 import SidebarItem from '../../atoms/sidebar-item'
 import TagIcon from '../../../assets/icons/tag.svg?react'
+import useIsMobile from '../../../hooks/useIsMobile'
+import { useSidebarStore } from '../../../store/ui/sidebar.store'
 
 interface Tag {
 	id: string
@@ -9,10 +12,6 @@ interface Tag {
 
 interface Props {
 	tags?: Tag[]
-	isSidebarOpen: boolean
-	closeSidebar: () => void
-	openSidebar: () => void
-	isSidebarPinned: boolean
 }
 
 export default function Sidebar({
@@ -22,11 +21,18 @@ export default function Sidebar({
 			title: 'HTML',
 		},
 	],
-	isSidebarOpen,
-	closeSidebar,
-	openSidebar,
-	isSidebarPinned,
 }: Props) {
+	const isMobile = useIsMobile()
+	const isSidebarOpen = useSidebarStore(s => s.isSidebarOpen)
+	const isSidebarPinned = useSidebarStore(s => s.isSidebarPinned)
+	const openSidebar = useSidebarStore(s => s.openSidebar)
+	const closeSidebar = useSidebarStore(s => s.closeSidebar)
+	const syncForMobile = useSidebarStore(s => s.syncForMobile)
+
+	useEffect(() => {
+		syncForMobile(isMobile)
+	}, [isMobile, syncForMobile])
+
 	return (
 		<aside
 			className={cn(
