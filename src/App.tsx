@@ -1,5 +1,5 @@
 import './App.css'
-import AppLayout from './components/templates/app-layout/app-layout'
+import AppLayout from './components/templates/app-layout'
 
 function App() {
 	return (

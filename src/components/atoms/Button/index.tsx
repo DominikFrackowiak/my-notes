@@ -1,22 +1,11 @@
 import { cn } from '../../../lib/tw-merge'
-
-type BackgroundColor =
-	| 'coral'
-	| 'peach'
-	| 'sand'
-	| 'peppermint'
-	| 'salvia'
-	| 'lightgray'
-	| 'storm'
-	| 'twilight'
-	| 'flower'
-	| 'clay'
-	| 'chalk'
+import { buttonColors } from '../../../constants/button-colors'
+import type { BackgroundColor } from '../../../constants/background-colors'
 
 interface Props {
-	size?: 'L' | 'SM'
+	size?: 'L' | 'SM' | 'XS'
 	icon?: React.ReactElement
-	onClick?: () => void
+	onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void
 	type?: 'button' | 'submit'
 	backgroundColor?: BackgroundColor
 	children?: React.ReactElement
@@ -27,35 +16,23 @@ interface Props {
 
 const buttonStyles = {
 	L: 'h-12 w-12',
-	SM: 'h-9 w-9',
+	M: 'h-8.5 w-8.5',
+	SM: 'h-7 w-7',
+	XS: 'h-4 w-4',
 } as const
 
 const IconSizes = {
 	L: 'h-6 w-6',
-	SM: 'h-3 w-3',
+	M: 'h-4 w-4',
+	SM: 'h-4 w-4',
+	XS: 'h-3 w-3',
 }
 
-const buttonColors = {
-	coral: 'bg-coral dark:bg-coral-dark ',
-	peach: 'bg-peach dark:bg-peach-dark ',
-	sand: 'bg-sand dark:bg-sand-dark',
-	peppermint: 'bg-peppermint dark:bg-peppermint-dark ',
-	salvia: 'bg-salvia dark:bg-salvia-dark ',
-	lightgray: 'bg-lightgray dark:bg-lightgray-dark ',
-	storm: 'bg-storm dark:bg-storm-dark ',
-	twilight: 'bg-twilight dark:bg-twilight-dark ',
-	flower: 'bg-flower dark:bg-flower-dark',
-	clay: 'bg-clay dark:bg-clay-dark ',
-	chalk: 'bg-chalk dark:bg-chalk-dark',
-	yellow:
-		'bg-button-background-yellow hover:bg-button-background-yellow dark:bg-button-background-yellow-dark dark:hover:bg-button-background-yellow-dark',
-} as const
-
 export default function Button({
-	size = 'L',
+	size,
 	icon,
 	onClick,
-	backgroundColor,
+	backgroundColor = 'default',
 	children,
 	className = '',
 	isRectangular = false,
@@ -63,14 +40,12 @@ export default function Button({
 	return (
 		<button
 			className={cn(
-				'inline-flex items-center justify-center cursor-pointer ',
-				buttonStyles[size],
+				'flex items-center justify-center cursor-pointer ',
+				size ? buttonStyles[size] : '',
 				backgroundColor
 					? buttonColors[backgroundColor]
 					: 'bg-transparent hover:bg-button-background-gray dark:hover:bg-button-background-gray-dark',
-				isRectangular
-					? 'w-auto! rounded px-6 py-2'
-					: 'rounded-full',
+				isRectangular ? 'rounded px-6! py-2!' : 'rounded-full',
 				className
 			)}
 			onClick={onClick}
@@ -78,7 +53,7 @@ export default function Button({
 			<div
 				className={cn(
 					'flex justify-center items-center w-full',
-					IconSizes[size]
+					size ? IconSizes[size] : ''
 				)}
 			>
 				{icon}

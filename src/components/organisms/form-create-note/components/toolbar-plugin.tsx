@@ -8,17 +8,20 @@ import {
 import { useState, useEffect } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
 // import { Popover } from '@ark-ui/react/popover'
-import Button from '../../atoms/Button'
+import Button from '../../../atoms/Button'
 // import FormattingIcon from '../../../assets/icons/formatting.svg'
-import PopoverComponent from '../../molecules/popover'
-import ImageIcon from '../../../assets/icons/image.svg?react'
-import PaletteIcon from '../../../assets/icons/palette.svg?react'
-import FormattingIcon from '../../../assets/icons/formatting.svg?react'
-import MoreOptionsIcon from '../../../assets/icons/more-options.svg?react'
-import ArchiveIcon from '../../../assets/icons/archive.svg?react'
+import PopoverComponent from '../../../molecules/popover'
+import ImageIcon from '../../../../assets/icons/image.svg?react'
+import PaletteIcon from '../../../../assets/icons/palette.svg?react'
+import FormattingIcon from '../../../../assets/icons/formatting.svg?react'
+import MoreOptionsIcon from '../../../../assets/icons/more-options.svg?react'
+import ArchiveIcon from '../../../../assets/icons/archive.svg?react'
 import TextFormattingSelection from './text-format'
 import BackgroundColorSelection from './background-color-selection'
 import MoreOptions from './more-options'
+
+import { useFormStore } from '../../../../store/ui/form.store'
+import { useNoteDraftStore } from '../../../../store/note-draft/note-draft.store'
 
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext()
@@ -27,6 +30,11 @@ function ToolbarPlugin() {
 	const [isUnderline, setIsUnderline] = useState(false)
 	const [isStrikethrough, setIsStrikethrough] = useState(false)
 	const [isOpen, setIsOpen] = useState(false)
+	const [showCreatableTagSelect, setShowCreatableTagSelect] =
+		useState<boolean>(false)
+
+	const setIsFormActive = useFormStore(store => store.setIsFormActive)
+	const setIsArchived = useNoteDraftStore(store => store.setIsArchived)
 
 	// Aktualizuj stan buttonów na podstawie zaznaczenia
 	const updateToolbar = () => {
@@ -56,7 +64,7 @@ function ToolbarPlugin() {
 		<div className='w-full flex flex-col gap-2 p-2'>
 			{isOpen ? <TextFormattingSelection formatText={formatText} /> : null}
 			<div className='flex w-full justify-between items-center'>
-				<div className='w-full flex items-center'>
+				<div className='w-full flex items-center gap-2'>
 					<Button
 						size='SM'
 						icon={<FormattingIcon className=' text-txt dark:text-txt-dark' />}
@@ -81,6 +89,11 @@ function ToolbarPlugin() {
 					<Button
 						size='SM'
 						icon={<ArchiveIcon className=' text-txt dark:text-txt-dark' />}
+						onClick={e => {
+							e.stopPropagation()
+							setIsArchived(true)
+							setIsFormActive(false)
+						}}
 					/>
 					<PopoverComponent
 						trigger={
@@ -91,17 +104,29 @@ function ToolbarPlugin() {
 								}
 							/>
 						}
-						onClick={() => setIsOpen(false)}
+						onClick={() => {
+							setShowCreatableTagSelect(false)
+							setIsOpen(false)
+						}}
 					>
-						<MoreOptions/>
+						<MoreOptions
+							showCreatableTagSelect={showCreatableTagSelect}
+							setShowCreatableTagSelect={setShowCreatableTagSelect}
+							data-ui='form-more-options'
+						/>
 					</PopoverComponent>
 				</div>
 				<Button
 					isRectangular={true}
-					size='SM'
-					onClick={() => console.log('Close')}
+					onClick={e => {
+						e.stopPropagation()
+
+						setIsFormActive(false)
+					}}
 				>
-					<span className='text-txt text-sm dark:text-txt-dark'>Zamknij</span>
+					<span className='text-txt-translucid-darker text-sm dark:text-txt-dark'>
+						Zamknij
+					</span>
 				</Button>
 			</div>
 		</div>

@@ -1,16 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import 'tailwindcss';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--font-sans: var(--font-sans);
+	--font-sans: 'Roboto';
+	--text-11: 11px;
 	--text-15: 15px;
 	--spacing-sidebar-full: 279px;
 	--spacing-form: 600px;
 	--color-border-form: #e0e0e0;
+	--color-translucid-black: rgba(0, 0, 0, 0.08);
 
 	--shadow-xl: 0 3px 5px rgba(0, 0, 0, 0.2);
 	--shadow-popover: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
 		0 2px 6px 2px rgba(60, 64, 67, 0.15);
+	--shadow-chip: rgba(0, 0, 0, 0) 0px 0px 0px 1;
 
 	/* backgrounds */
 	--color-background: #ffffff;
@@ -18,6 +24,8 @@
 
 	/* text */
 	--color-txt: rgb(32, 33, 36);
+	--color-txt-translucid: rgba(0, 0, 0, 0.6);
+	--color-txt-translucid-darker: rgba(0, 0, 0, 0.87);
 	--color-txt-dark: rgb(232, 234, 237);
 
 	/* colors */

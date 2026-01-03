@@ -3,14 +3,12 @@ import HamburgerIcon from '../../../assets/icons/hamburger.svg'
 import { useThemeStore } from '../../../store/ui/theme.store'
 import { useSidebarStore } from '../../../store/ui/sidebar.store'
 
-
-
 export default function Header() {
 	const toggleTheme = useThemeStore(state => state.switchTheme)
 	const toggleSidebar = useSidebarStore(state => state.toggleSidebar)
-	
+
 	return (
-		<header className='fixed top-0 left-0 flex w-full h-16'>
+		<header className='fixed top-0 left-0 flex w-full h-16 justify-between'>
 			<div className='flex items-center h-full gap-2'>
 				<Button
 					size='L'

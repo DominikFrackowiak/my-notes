@@ -30,7 +30,7 @@ export default function PopoverComponent({
 					// background: 'transparent',
 				}}
 			>
-				<Popover.Content>
+				<Popover.Content style={{position: 'relative'}}>
 					{children}
 				</Popover.Content>
 			</Popover.Positioner>

@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import BoldIcon from '../../../assets/icons/bold.svg?react'
-import ItalicIcon from '../../../assets/icons/italic.svg?react'
-import UnderlineIcon from '../../../assets/icons/underline.svg?react'
-import NoFormatIcon from '../../../assets/icons/no-format.svg?react'
-import Button from '../../atoms/Button'
+import BoldIcon from '../../../../assets/icons/bold.svg?react'
+import ItalicIcon from '../../../../assets/icons/italic.svg?react'
+import UnderlineIcon from '../../../../assets/icons/underline.svg?react'
+import NoFormatIcon from '../../../../assets/icons/no-format.svg?react'
+import Button from '../../../atoms/Button'
 
 export default function TextFormattingSelection({
 	formatText,
