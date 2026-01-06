@@ -5,11 +5,11 @@ import {
 	type TextFormatType,
 } from 'lexical'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-// import { Popover } from '@ark-ui/react/popover'
+import { INSERT_IMAGE_COMMAND } from './image-plugin'
+
 import Button from '../../../atoms/Button'
-// import FormattingIcon from '../../../assets/icons/formatting.svg'
 import PopoverComponent from '../../../molecules/popover'
 import ImageIcon from '../../../../assets/icons/image.svg?react'
 import PaletteIcon from '../../../../assets/icons/palette.svg?react'
@@ -35,6 +35,8 @@ function ToolbarPlugin() {
 
 	const setIsFormActive = useFormStore(store => store.setIsFormActive)
 	const setIsArchived = useNoteDraftStore(store => store.setIsArchived)
+
+	const fileRef = useRef<HTMLInputElement | null>(null)
 
 	// Aktualizuj stan buttonów na podstawie zaznaczenia
 	const updateToolbar = () => {
@@ -84,7 +86,31 @@ function ToolbarPlugin() {
 					<Button
 						size='SM'
 						icon={<ImageIcon className=' text-txt dark:text-txt-dark' />}
-						// onClick={() => setIsOpen(v => !v)}
+						onClick={e => {
+							e.stopPropagation()
+							fileRef.current?.click()
+						}}
+					/>
+					<input
+						ref={fileRef}
+						type='file'
+						accept='image/*'
+						hidden
+						onChange={e => {
+							const file = e.target.files?.[0]
+							if (!file) return
+
+							const reader = new FileReader()
+							reader.onload = () => {
+								const src = String(reader.result)
+								editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+									src,
+									altText: file.name,
+								})
+								e.target.value = ''
+							}
+							reader.readAsDataURL(file)
+						}}
 					/>
 					<Button
 						size='SM'

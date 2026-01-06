@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+
 import { LexicalComposer } from '@lexical/react/LexicalComposer'
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin'
 import { ContentEditable } from '@lexical/react/LexicalContentEditable'
@@ -15,6 +16,10 @@ import TagChip from '../../atoms/tag-chip'
 import { useNoteDraftStore } from '../../../store/note-draft/note-draft.store'
 import { useFormStore } from '../../../store/ui/form.store'
 import { backgroundColors } from '../../../constants/background-colors'
+import { ImageNode } from './nodes/image-node'
+import ImagePlugin from './components/image-plugin'
+import { INSERT_IMAGE_COMMAND } from './components/image-plugin'
+import { ImageUploadButtonPlugin } from './components/image-upload-button-plugin'
 
 const theme = {
 	text: {
@@ -43,6 +48,7 @@ export default function Form() {
 	const note = useNoteDraftStore(store => store.note)
 
 	const refForm = useRef<HTMLDivElement | null>(null)
+	const fileRef = useRef<HTMLInputElement | null>(null)
 
 	const titleConfig = {
 		namespace: 'TitleEditor',
@@ -54,6 +60,7 @@ export default function Form() {
 		namespace: 'ContentEditor',
 		theme,
 		onError,
+		nodes: [ImageNode],
 	}
 
 	useEffect(() => {
@@ -121,8 +128,10 @@ export default function Form() {
 									icon={!isPinned ? <PinNoteIcon /> : <PinnedNoteIcon />}
 									onClick={togglePinned}
 								/>
+								
 							</div>
 							<HistoryPlugin />
+
 							<OnChangePlugin
 								onChange={editorState => {
 									const json = JSON.stringify(editorState.toJSON())
@@ -149,7 +158,8 @@ export default function Form() {
 								}
 								ErrorBoundary={LexicalErrorBoundary}
 							/>
-							{!isFormActive ? <Button size='L' icon={<ImageIcon />} /> : null}
+							<ImagePlugin />
+							{!isFormActive ? <ImageUploadButtonPlugin />  : null}
 						</div>
 
 						<HistoryPlugin />
