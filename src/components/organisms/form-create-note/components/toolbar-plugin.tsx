@@ -22,6 +22,7 @@ import MoreOptions from './more-options'
 
 import { useFormStore } from '../../../../store/ui/form.store'
 import { useNoteDraftStore } from '../../../../store/note-draft/note-draft.store'
+import { ImageUploadButtonPlugin } from './image-upload-button-plugin'
 
 function ToolbarPlugin() {
 	const [editor] = useLexicalComposerContext()
@@ -83,7 +84,7 @@ function ToolbarPlugin() {
 					>
 						<BackgroundColorSelection />
 					</PopoverComponent>
-					<Button
+					{/* <Button
 						size='SM'
 						icon={<ImageIcon className=' text-txt dark:text-txt-dark' />}
 						onClick={e => {
@@ -111,7 +112,8 @@ function ToolbarPlugin() {
 							}
 							reader.readAsDataURL(file)
 						}}
-					/>
+					/> */}
+					<ImageUploadButtonPlugin />
 					<Button
 						size='SM'
 						icon={<ArchiveIcon className=' text-txt dark:text-txt-dark' />}

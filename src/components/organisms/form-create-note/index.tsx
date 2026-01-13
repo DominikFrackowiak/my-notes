@@ -128,7 +128,6 @@ export default function Form() {
 									icon={!isPinned ? <PinNoteIcon /> : <PinnedNoteIcon />}
 									onClick={togglePinned}
 								/>
-								
 							</div>
 							<HistoryPlugin />
 
@@ -158,8 +157,9 @@ export default function Form() {
 								}
 								ErrorBoundary={LexicalErrorBoundary}
 							/>
+
+							{!isFormActive ? <ImageUploadButtonPlugin /> : null}
 							<ImagePlugin />
-							{!isFormActive ? <ImageUploadButtonPlugin />  : null}
 						</div>
 
 						<HistoryPlugin />
