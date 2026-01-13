@@ -12,6 +12,7 @@ interface Props {
 	className?: string
 	id?: string
 	isRectangular?: boolean
+	isActive?: boolean
 }
 
 const buttonStyles = {
@@ -36,6 +37,7 @@ export default function Button({
 	children,
 	className = '',
 	isRectangular = false,
+	isActive = false,
 }: Props) {
 	return (
 		<button
@@ -46,6 +48,7 @@ export default function Button({
 					? buttonColors[backgroundColor]
 					: 'bg-transparent hover:bg-button-background-gray dark:hover:bg-button-background-gray-dark',
 				isRectangular ? 'rounded px-6! py-2!' : 'rounded-full',
+				isActive ? 'bg-button-background-gray dark:bg-button-background-gray-dark' : 'hover:bg-button-background-gray dark:hover:bg-button-background-gray-dark',
 				className
 			)}
 			onClick={onClick}

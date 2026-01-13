@@ -3,6 +3,7 @@ import Sidebar from '../../organisms/sidebar'
 import Form from '../../organisms/form-create-note'
 import { cn } from '../../../lib/tw-merge'
 import { useThemeStore } from '../../../store/ui/theme.store'
+import RichTextEditor from '../../organisms/rich-text-editor'
 
 export default function AppLayout() {
 	const theme = useThemeStore(state => state.theme)
@@ -18,7 +19,8 @@ export default function AppLayout() {
 			<div className='flex'>
 				<Sidebar />
 				<main className='flex items-start justify-center gap-8 flex-1 mt-16 py-8 px-8'>
-					<Form />
+					{/* <Form /> */}
+					<RichTextEditor />
 				</main>
 			</div>
 		</div>
