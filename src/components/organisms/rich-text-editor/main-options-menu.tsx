@@ -35,7 +35,7 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
 
   //   const fileRef = useRef<HTMLInputElement | null>(null);
   return (
-    <div className="w-full flex flex-col gap-2 p-2 border border-red-700">
+    <div className="w-full flex flex-col gap-2 p-2">
       {isTextFormattingMenuOpen ? <TextFormattingMenu editor={editor} /> : null}
       <div className="flex w-full justify-between items-center">
         <div className="w-full flex items-center gap-2">
