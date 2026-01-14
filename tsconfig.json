@@ -1,7 +1,11 @@
 {
-	"compilerOptions": {
-		"moduleResolution": "node",
-		"jsx": "react-jsx"
-	},
-	"include": ["src", "src/vite-env.d.ts"]
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "src/vite-env.d.ts"]
 }

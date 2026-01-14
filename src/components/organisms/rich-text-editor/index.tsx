@@ -4,9 +4,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 
-// import { ImageUploadNode } from "@/components/tiptap-node/image-upload-node";
-// import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
-
 import { useRef } from "react";
 import MainOptionsMenu from "./main-options-menu";
 import { useFormStore } from "../../../store/ui/form.store";
@@ -34,15 +31,8 @@ function RichTextEditor() {
           alwaysPreserveAspectRatio: true,
         },
       }),
-      //   ImageUploadNode.configure({
-      //     accept: "image/*",
-      //     maxSize: MAX_FILE_SIZE,
-      //     limit: 3,
-      //     upload: handleImageUpload,
-      //     onError: (error) => console.error("Upload failed:", error),
-      //   }),
     ],
-    // content: '<p>Utworz notatke</p>',
+
     editorProps: {
       attributes: {
         class: "tiptap",
@@ -58,7 +48,7 @@ function RichTextEditor() {
         placeholder: "Tytuł",
       }),
     ],
-    // content: '<p>Utworz notatke</p>',
+
     editorProps: {
       attributes: {
         class: "tiptap",

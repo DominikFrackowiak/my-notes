@@ -1,30 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-// import useImageUpload from "@/components/tiptap-ui/image-upload-button";
 import Button from "../../atoms/Button";
 import PopoverComponent from "../../molecules/popover";
-// import ImageIcon from "../../assets/icons/image.svg?react";
+
 import ImageIcon from "../../../assets/icons/image.svg?react";
 import PaletteIcon from "../../../assets/icons/palette.svg?react";
 import FormattingIcon from "../../../assets/icons/formatting.svg?react";
 import MoreOptionsIcon from "../../../assets/icons/more-options.svg?react";
 import ArchiveIcon from "../../../assets/icons/archive.svg?react";
 
-import BackgroundColorSelection from "../form-create-note/components/background-color-selection";
-import MoreOptions from "../form-create-note/components/more-options";
+import BackgroundColorSelection from "./background-color-selection";
+import MoreOptions from "./more-options";
 import TextFormattingMenu from "./text-formatting-menu";
 import { type Editor } from "@tiptap/react";
 import { useFormStore } from "../../../store/ui/form.store";
 import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
+import { uploadImage } from "../../../services/upload-image";
 
 export default function MainOptionsMenu({ editor }: { editor: Editor }) {
-  // const { handleImage } = useImageUpload({
-  //   editor,
-  //   hideWhenUnavailable: true,
-  //   onInserted: () => {
-  //     // opcjonalnie: toast / analytics
-  //   },
-  // });
   const [isTextFormattingMenuOpen, setIsTextFormattingMenuOpen] =
     useState(false);
   const [showCreatableTagSelect, setShowCreatableTagSelect] =
@@ -33,7 +26,42 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
   const setIsFormActive = useFormStore((store) => store.setIsFormActive);
   const setIsArchived = useNoteDraftStore((store) => store.setIsArchived);
 
-  //   const fileRef = useRef<HTMLInputElement | null>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  function replaceImageSrc(editor: Editor, fromSrc: string, toSrc: string) {
+    const { state, view } = editor;
+    const { tr } = state;
+
+    state.doc.descendants((node, pos) => {
+      if (node.type.name === "image" && node.attrs.src === fromSrc) {
+        tr.setNodeMarkup(pos, undefined, { ...node.attrs, src: toSrc });
+        return false;
+      }
+      return true;
+    });
+
+    if (tr.docChanged) view.dispatch(tr);
+  }
+
+  async function onPickImage(file: File) {
+    setIsUploading(true);
+
+    const localUrl = URL.createObjectURL(file);
+    editor.chain().focus().setImage({ src: localUrl, alt: file.name }).run();
+
+    try {
+      const remoteUrl = await uploadImage(file);
+
+      replaceImageSrc(editor, localUrl, remoteUrl);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      URL.revokeObjectURL(localUrl);
+      setIsUploading(false);
+    }
+  }
+
   return (
     <div className="w-full flex flex-col gap-2 p-2">
       {isTextFormattingMenuOpen ? <TextFormattingMenu editor={editor} /> : null}
@@ -60,12 +88,22 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
             icon={<ImageIcon className=" text-txt dark:text-txt-dark" />}
             onClick={(e) => {
               e.stopPropagation();
-              //   fileRef.current?.click();
-              alert("working");
-              // handleImage();
+              fileRef.current?.click();
             }}
           />
-
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={async (e) => {
+              e.stopPropagation();
+              const file = e.target.files?.[0];
+              if (!file) return;
+              e.currentTarget.value = "";
+              await onPickImage(file);
+            }}
+          />
           <Button
             size="SM"
             icon={<ArchiveIcon className=" text-txt dark:text-txt-dark" />}
@@ -97,7 +135,7 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
           </PopoverComponent>
         </div>
         <Button
-          isRectangular={true}
+          isRectangular
           onClick={(e) => {
             e.stopPropagation();
 
