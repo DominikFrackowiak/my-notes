@@ -1,4 +1,4 @@
-import AddIcon from "../../../../assets/icons/plus.svg?react";
+import AddIcon from "../../../assets/icons/plus.svg?react";
 import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
 
 export default function CreateTag({ query }: { query: string }) {

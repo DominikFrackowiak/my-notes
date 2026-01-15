@@ -1,5 +1,5 @@
-import CheckboxChecked from "../../../../assets/icons/checkbox-checked.svg?react";
-import CheckboxUnchecked from "../../../../assets/icons/checkbox-unchecked.svg?react";
+import CheckboxChecked from "../../../assets/icons/checkbox-checked.svg?react";
+import CheckboxUnchecked from "../../../assets/icons/checkbox-unchecked.svg?react";
 import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
 
 interface Props {
