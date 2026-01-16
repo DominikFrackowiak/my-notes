@@ -10,6 +10,7 @@ import { useFormStore } from "../../../store/ui/form.store";
 import { cn } from "../../../lib/tw-merge";
 import { backgroundColors } from "../../../constants/background-colors";
 import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
+import TagsBar from "./tags-bar";
 
 function RichTextEditor() {
   const refEditor = useRef<HTMLDivElement | null>(null);
@@ -18,6 +19,7 @@ function RichTextEditor() {
   const backgroundColor = useNoteDraftStore(
     (store) => store.note.backgroundColor
   );
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -77,7 +79,7 @@ function RichTextEditor() {
         data-ui="form"
         ref={refEditor}
         className={cn(
-          "flex flex-col w-full lg:w-form shadow-xl rounded-lg border border-border-form transition-colors duration-1000 text-txt-translucid gap-4",
+          "flex flex-col w-full lg:w-form shadow-xl rounded-lg border border-border-form transition-colors duration-1000 text-txt-translucid gap-2",
           !isFormActive
             ? "h-11 justify-center px-4"
             : "min-h-34 h-auto justify-start px-4 pt-3",
@@ -90,6 +92,7 @@ function RichTextEditor() {
       >
         {isFormActive ? <EditorContent editor={titleEditor} /> : null}
         <EditorContent editor={editor} />
+        {isFormActive ? <TagsBar /> : null}
         {isFormActive ? <MainOptionsMenu editor={editor} /> : null}
       </div>
     </div>
