@@ -13,6 +13,7 @@ interface Props {
 	id?: string
 	isRectangular?: boolean
 	isActive?: boolean
+	as?: React.ElementType
 }
 
 const buttonStyles = {
@@ -38,9 +39,12 @@ export default function Button({
 	className = '',
 	isRectangular = false,
 	isActive = false,
+	as = 'button'
 }: Props) {
+	const El = as
 	return (
-		<button
+
+		<El
 			className={cn(
 				'flex items-center justify-center cursor-pointer ',
 				size ? buttonStyles[size] : '',
@@ -62,6 +66,6 @@ export default function Button({
 				{icon}
 				{children}
 			</div>
-		</button>
+		</El>
 	)
 }

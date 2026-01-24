@@ -1,12 +1,12 @@
 import { type Editor, useEditorState } from "@tiptap/react";
-import BoldIcon from "../../../assets/icons/bold.svg?react";
-import ItalicIcon from "../../../assets/icons/italic.svg?react";
-import UnderlineIcon from "../../../assets/icons/underline.svg?react";
-import NoFormatIcon from "../../../assets/icons/no-format.svg?react";
-import ParagraphIcon from "../../../assets/icons/paragraph.svg?react";
-import Heading1Icon from "../../../assets/icons/heading1.svg?react";
-import Heading2Icon from "../../../assets/icons/heading2.svg?react";
-import Button from "../../atoms/Button";
+import BoldIcon from "../../../../assets/icons/bold.svg?react";
+import ItalicIcon from "../../../../assets/icons/italic.svg?react";
+import UnderlineIcon from "../../../../assets/icons/underline.svg?react";
+import NoFormatIcon from "../../../../assets/icons/no-format.svg?react";
+import ParagraphIcon from "../../../../assets/icons/paragraph.svg?react";
+import Heading1Icon from "../../../../assets/icons/heading1.svg?react";
+import Heading2Icon from "../../../../assets/icons/heading2.svg?react";
+import Button from "../../../atoms/Button";
 
 export default function TextFormattingMenu({ editor }: { editor: Editor }) {
   useEditorState({
@@ -83,8 +83,8 @@ export default function TextFormattingMenu({ editor }: { editor: Editor }) {
   ];
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex gap-2 px-4">
+    <div className="flex justify-between items-center w-70 shadow-popover px-2 py-1">
+      <div className="flex gap-2">
         {HTMLTagOptions.map((option) => (
           <Button
             key={option.name}
@@ -95,8 +95,8 @@ export default function TextFormattingMenu({ editor }: { editor: Editor }) {
           />
         ))}
       </div>
-      <div className="h-6 w-px bg-button-background-gray dark:bg-button-background-gray-dark"></div>
-      <div className="flex gap-2 px-4 ">
+      <div className="h-6 w-px bg-button-background-gray dark:bg-button-background-gray-dark ml-2 mr-2"></div>
+      <div className="flex gap-2">
         {Options.map((option) => (
           <Button
             key={option.name}

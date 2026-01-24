@@ -1,5 +1,5 @@
-import Button from "../../atoms/Button";
-import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
+import Button from "../../../atoms/Button";
+import { useNoteDraftStore } from "../../../../store/note-draft/note-draft.store";
 
 const colors = [
   "default",

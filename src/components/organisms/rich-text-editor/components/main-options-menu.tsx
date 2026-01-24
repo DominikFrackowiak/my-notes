@@ -1,21 +1,22 @@
 import { useRef, useState } from "react";
 
-import Button from "../../atoms/Button";
-import PopoverComponent from "../../molecules/popover";
+import Button from "../../../atoms/Button";
+import PopoverComponent from "../../../molecules/popover";
 
-import ImageIcon from "../../../assets/icons/image.svg?react";
-import PaletteIcon from "../../../assets/icons/palette.svg?react";
-import FormattingIcon from "../../../assets/icons/formatting.svg?react";
-import MoreOptionsIcon from "../../../assets/icons/more-options.svg?react";
-import ArchiveIcon from "../../../assets/icons/archive.svg?react";
+import ImageIcon from "../../../../assets/icons/image.svg?react";
+import PaletteIcon from "../../../../assets/icons/palette.svg?react";
+import FormattingIcon from "../../../../assets/icons/formatting.svg?react";
+import MoreOptionsIcon from "../../../../assets/icons/more-options.svg?react";
+import ArchiveIcon from "../../../../assets/icons/archive.svg?react";
+import RepeatIcon from "../../../../assets/icons/repeat.svg?react";
 
 import BackgroundColorSelection from "./background-color-selection";
 import MoreOptions from "./more-options";
 import TextFormattingMenu from "./text-formatting-menu";
 import { type Editor } from "@tiptap/react";
-import { useFormStore } from "../../../store/ui/form.store";
-import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
-import { uploadImage } from "../../../services/upload-image";
+import { useFormStore } from "../../../../store/ui/form.store";
+import { useNoteDraftStore } from "../../../../store/note-draft/note-draft.store";
+import { uploadImage } from "../../../../services/upload-image";
 
 export default function MainOptionsMenu({ editor }: { editor: Editor }) {
   const [isTextFormattingMenuOpen, setIsTextFormattingMenuOpen] =
@@ -48,7 +49,7 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
     setIsUploading(true);
 
     const localUrl = URL.createObjectURL(file);
-    editor.chain().focus().setImage({ src: localUrl, alt: file.name }).run();
+    editor.chain().focus().setImage({ src: localUrl, alt: file.name }).createParagraphNear().run();
 
     try {
       const remoteUrl = await uploadImage(file);
@@ -63,7 +64,7 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
   }
 
   return (
-    <div className="w-full flex flex-col gap-2 p-2">
+    <div className="w-full flex flex-col gap-2 py-2">
       {isTextFormattingMenuOpen ? <TextFormattingMenu editor={editor} /> : null}
       <div className="flex w-full justify-between items-center">
         <div className="w-full flex items-center gap-2">
@@ -77,7 +78,9 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
               <Button
                 size="SM"
                 icon={<PaletteIcon className="text-txt dark:text-txt-dark" />}
+                as="div"
               />
+
             }
             onClick={() => setIsTextFormattingMenuOpen(false)}
           >
@@ -120,6 +123,7 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
                 icon={
                   <MoreOptionsIcon className="text-txt dark:text-txt-dark" />
                 }
+                as="div"
               />
             }
             onClick={() => {
@@ -133,6 +137,8 @@ export default function MainOptionsMenu({ editor }: { editor: Editor }) {
               data-ui="form-more-options"
             />
           </PopoverComponent>
+          <Button size="SM" icon={<RepeatIcon className="text-txt dark:text-txt-dark" />} onClick={() => editor.chain().focus().undo().run()} />
+          <Button size="SM" icon={<RepeatIcon className="text-txt dark:text-txt-dark rotate-180" />} onClick={() => editor.chain().focus().redo().run()} />
         </div>
         <Button
           isRectangular

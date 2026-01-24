@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import SearchIcon from "../../../assets/icons/search.svg?react";
+import SearchIcon from "../../../../assets/icons/search.svg?react";
 import TagSelectItem from "./tag-select-item";
 import CreateTag from "./create-tag";
-import { useNoteDraftStore } from "../../../store/note-draft/note-draft.store";
+import { useNoteDraftStore } from "../../../../store/note-draft/note-draft.store";
 
 export default function CreatableTagSelect() {
   const [searchedValue, setSearchedValue] = useState("");
